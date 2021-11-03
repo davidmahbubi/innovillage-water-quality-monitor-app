@@ -1,0 +1,7 @@
+{
+  "name": "innovillage_water_quality_monitor",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
