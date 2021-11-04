@@ -23,6 +23,7 @@ import CustomSemiCircleIndicator from '../components/Widgets/CustomSemiCircleInd
 import ColorfulLineProgress from './../components/Widgets/ColorfulLineProgress.vue';
 import Header from '@/components/Header.vue';
 import { IonPage, IonContent } from '@ionic/vue';
+import { db } from './../storage/realtime-database';
 
 export default {
   name: 'Home',
@@ -46,25 +47,20 @@ export default {
   },
   mounted() {
     this.setTemperatureValue();
-    this.setPhValue();
+    this.getPhValue();
   },
   methods: {
     setTemperatureValue() {
-      const ctx = this;
-      setInterval(() => {
-        if (ctx.stats.temperature > 0.9) ctx.stats.temperature = 0.1;
-        ctx.stats.temperature += 0.1;
-      }, 1000);
+      this.stats.temperature = 0.272;
     },
-    setPhValue() {
+    getPhValue() {
       const ctx = this;
-      setInterval(() => {
-        const ph = Math.round(Math.random() * 14);
+      db.ref('/realtime/ph').on('value', snapshot => {
+        const ph = Number(snapshot.val());
         ctx.stats.ph = (ph / 14) * 100;
-        ctx.$refs['colorful-line-progress'].setText(ph);
-      }, 1000);
+        ctx.$refs['colorful-line-progress'].setText(ph.toFixed(2));
+      });
     },
-    setColor() {},
   },
   components: {
     IonContent,
