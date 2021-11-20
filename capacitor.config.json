@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
   "appName": "innovillage_water_quality_monitor",
-  "webDir": "www",
+  "webDir": "dist",
   "bundledWebRuntime": false
 }

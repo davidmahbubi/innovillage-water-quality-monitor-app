@@ -5,8 +5,8 @@
       <custom-semi-circle-indicator
         :id="'temperature-indicator'"
         :with-card="true"
-        title="Suhu Air"
-        :value="stats.temperature" />
+        title="Tingkat Kejernihan Air"
+        :value="stats.tds" />
       <colorful-line-progress
         ref="colorful-line-progress"
         :with-card="true"
@@ -40,18 +40,21 @@ export default {
         },
       },
       stats: {
-        temperature: 0,
+        tds: 0,
         ph: 0,
       },
     };
   },
   mounted() {
-    this.setTemperatureValue();
+    this.getTdsValue();
     this.getPhValue();
   },
   methods: {
-    setTemperatureValue() {
-      this.stats.temperature = 0.272;
+    getTdsValue() {
+      const ctx = this;
+      db.ref('/realtime/tds').on('value', snapshot => {
+        ctx.stats.tds = Number(snapshot.val());
+      });
     },
     getPhValue() {
       const ctx = this;

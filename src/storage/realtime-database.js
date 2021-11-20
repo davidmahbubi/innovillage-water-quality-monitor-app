@@ -14,12 +14,5 @@ const firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig);
 
-// firebase
-//   .database()
-//   .ref('/realtime')
-//   .on('value', snapshot => {
-//     console.log(snapshot);
-//   });
-
 export const db = firebase.database();
 export default app;

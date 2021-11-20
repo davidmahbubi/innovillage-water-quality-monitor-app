@@ -11,13 +11,23 @@
         {{ title }}
       </ion-card-title>
       <div :id="id"></div>
+      <ion-grid style="margin-top: 20px; visibility: visible; padding: 0">
+        <ion-row>
+          <ion-col style="text-align: left">
+            <h5 style="margin: 0; color: black">Jernih</h5>
+          </ion-col>
+          <ion-col style="text-align: right">
+            <h5 style="margin: 0; color: black">Keruh</h5>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card>
     <div style="padding: 20px" v-else :id="id"></div>
   </div>
 </template>
 
 <script>
-import { IonCard, IonCardTitle } from '@ionic/vue';
+import { IonCard, IonCardTitle, IonRow, IonCol, IonGrid } from '@ionic/vue';
 import ProgressBar from 'progressbar.js';
 
 export default {
@@ -70,7 +80,7 @@ export default {
   },
   methods: {
     setValue(value = 0) {
-      this.indicatorInstance.animate(value);
+      this.indicatorInstance.animate(value / 1000);
       return this;
     },
     setText(text) {
@@ -79,13 +89,16 @@ export default {
   },
   watch: {
     value(val) {
-      this.setText(`${Math.round(val * 100)} &deg;C`);
+      this.setText(`${val} ppm`);
       this.setValue(val);
     },
   },
   components: {
     IonCard,
     IonCardTitle,
+    IonRow,
+    IonCol,
+    IonGrid,
   },
 };
 </script>

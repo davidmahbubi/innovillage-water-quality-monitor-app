@@ -17,7 +17,10 @@
           0
         </h1>
       </ion-card-title>
-      <div ref="progress-container" class="progress-container"></div>
+      <div
+        ref="progress-container"
+        class="progress-container"
+        style="overflow-y: hidden"></div>
       <div
         class="needle-container"
         ref="progress-needle"
